@@ -12,7 +12,7 @@ Functions to mutate the payments and transactions tables are in the transactions
 
 Start with "node index.js"
 
-### Frontend Client
+### Frontend Client (folder "sfr-hasura")
 The client is built with angular and uses Apollo as an abstraction layer.
 It can be used to create new payments via mutation and subscribes to payment and transaction changes.
 Payments and transactions are presented in the GUI.
