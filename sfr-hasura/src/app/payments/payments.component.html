@@ -1,0 +1,67 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>New Payment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #myForm="ngForm" (ngSubmit)="addPayment()">
+            <div class="buttons">
+                <mat-form-field class="example-full-width" appearance="fill" style="margin-right: 10px;">
+                    <mat-label>Recipient</mat-label>
+                    <input matInput type="text" [(ngModel)]="recipientInput" required
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="number" [(ngModel)]="amountInput" required
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Submit</button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div class="container">
+    <div>
+        <mat-list>
+            <div mat-subheader>Payments</div>
+            <mat-list-item *ngFor="let payment of payments">
+                <mat-card>
+                    <mat-card-content>
+
+                        <mat-icon mat-list-icon>payment</mat-icon>
+                        <div mat-line>Recipient: {{payment.recipient}}</div>
+                        <div mat-line>Amount: {{payment.amount}}€ </div>
+                        <!-- <div mat-line>Completed {{payment.completed}} </div> -->
+                        <div mat-line>Created at: {{payment.created_at | date: 'short'}} </div>
+                        <mat-checkbox  mat-line [disabled]="true" labelPosition="before" [checked]="payment.completed">Completed</mat-checkbox>
+                    </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    
+    <div style="margin-left: 30px;">
+        <mat-list>
+            <div mat-subheader>Transactions</div>
+            <mat-list-item *ngFor="let transaction of transactions">
+                <mat-card>
+                    <mat-card-content>
+                        <mat-icon mat-list-icon>compare_arrows</mat-icon>
+                        <div mat-line>Transaction ID: {{transaction.id}}</div>
+                        <div mat-line>Payment ID: {{transaction.payment_id}}</div>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-icon mat-list-icon>payment</mat-icon>
+                        <div mat-line>Payment Recipient: {{transaction.payment.recipient}}</div>
+                        <div mat-line>Payment Amount: {{transaction.payment.amount}}€</div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
